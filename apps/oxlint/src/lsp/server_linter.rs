@@ -605,9 +605,15 @@ impl Tool for ServerLinter {
         let actions =
             actions.into_iter().filter(|r| r.range == *range || range_overlaps(*range, r.range));
         // if `source.fixAll.oxc` or `source.fixAll` is requested, return a single code action that applies all fixes
+        // aligning with eslint language server:
+        // https://github.com/microsoft/vscode-eslint/blob/1572a25c619861a812c6593c9b130ee52361bcf0/server/src/eslintServer.ts#L587-L589
+        // zed editor will always requests with this layout: `"only": ["quickfix", "source.fixAll.oxc", "source.fixAll"]`
+        // https://github.com/oxc-project/oxc-zed/issues/133#issuecomment-4007046920
         let is_source_fix_all = only_code_action_kinds.is_some_and(|only| {
-            only.contains(&CODE_ACTION_KIND_SOURCE_FIX_ALL_OXC)
-                || only.contains(&CodeActionKind::SOURCE_FIX_ALL)
+            only.first().map_or(false, |kind| {
+                kind == &CODE_ACTION_KIND_SOURCE_FIX_ALL_OXC
+                    || kind == &CodeActionKind::SOURCE_FIX_ALL
+            })
         });
 
         if is_source_fix_all {
