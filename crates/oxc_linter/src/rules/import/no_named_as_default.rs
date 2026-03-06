@@ -42,7 +42,7 @@ declare_oxc_lint!(
     /// ```javascript
     /// // foo.js
     /// export default 'foo';
-    /// export const bar = 'baz';
+    /// export const bar = true;
     /// ```
     ///
     /// Examples of **incorrect** code for this rule:
@@ -56,6 +56,16 @@ declare_oxc_lint!(
     /// // Valid: correctly importing default export with a non-conflicting name.
     /// import foo from './foo.js';
     /// ```
+    ///
+    /// ### Differences compared to `eslint-plugin-import`
+    ///
+    /// If you see differences between this rule implementation and the original `eslint-plugin-import`
+    /// rule, please note that the behavior may differ in certain cases, usually where Oxlint is more
+    /// accurate and able to correctly resolve more of the imports in a codebase.
+    ///
+    /// The original rule may not be able to resolve certain imports correctly, especially in cases
+    /// where TypeScript paths are used without providing a typescript resolver to ESLint, or in
+    /// monorepo setups with multiple `tsconfig.json` files.
     NoNamedAsDefault,
     import,
     suspicious
