@@ -60,12 +60,12 @@ declare_oxc_lint!(
     /// ### Differences compared to `eslint-plugin-import`
     ///
     /// If you see differences between this rule implementation and the original `eslint-plugin-import`
-    /// rule, please note that the behavior may differ in certain cases, usually where Oxlint is more
-    /// accurate and able to correctly resolve more of the imports in a codebase.
+    /// rule, please note that the behavior may differ in certain cases due to differences in how
+    /// module resolution is implemented and configured.
     ///
-    /// The original rule may not be able to resolve certain imports correctly, especially in cases
-    /// where TypeScript paths are used without providing a typescript resolver to ESLint, or in
-    /// monorepo setups with multiple `tsconfig.json` files.
+    /// For example, the original rule may require additional resolver configuration to handle certain
+    /// imports, especially when TypeScript paths are used or in monorepo setups with multiple
+    /// `tsconfig.json` files.
     NoNamedAsDefault,
     import,
     suspicious
