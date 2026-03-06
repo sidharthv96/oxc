@@ -96,7 +96,7 @@ fn test() {
         "parentNode.removeChild(undefined)",
         "new parentNode.removeChild(bar);",
         "removeChild(foo);",
-        // `callee.property` is not a `Identifier`
+        // `callee.property` is not an `Identifier`
         // TODO: Get this passing.
         // "parentNode['removeChild'](bar);",
         // Computed
