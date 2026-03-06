@@ -12,7 +12,7 @@ use crate::{
 
 fn prefer_dom_node_remove_diagnostic(span: Span) -> OxcDiagnostic {
     OxcDiagnostic::warn("Prefer `childNode.remove()` over `parentNode.removeChild(childNode)`.")
-        .with_help("Replace `parentNode.removeChild(childNode)` with `childNode{dotOrQuestionDot}remove()`.")
+        .with_help("Replace `parentNode.removeChild(childNode)` with `childNode.remove()`.")
         .with_label(span)
 }
 
@@ -108,7 +108,7 @@ fn test() {
         "parentNode.removeChild(...argumentsArray)",
         // Optional call
         "parentNode.removeChild?.(foo)",
-        // The following are all generated from this JS code:
+        // The following are all generated from this JS code upstream:
         // ...notDomNodeTypes.map(data => `(${data}).removeChild(foo)`),
         // ...notDomNodeTypes.map(data => `foo.removeChild(${data})`),
         // TODO: Fix these by ensuring we don't raise a violation on non-DOM nodes.
