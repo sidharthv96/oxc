@@ -394,8 +394,9 @@ declare_oxc_lint!(
     /// ESM-based file resolve algorithms (e.g., the one that Vite provides) recommend
     /// specifying the file extension to improve performance. Without extensions, the
     /// bundler must check for various possible file extensions, which can slow down
-    /// the build process on large projects. In addition, the JavaScript specification
-    /// for ESM modules does not allow extensionless imports at all.
+    /// the build process on large projects. In addition, common ESM environments
+    /// (such as browsers and Node.js) typically require fully specified relative imports,
+    /// which means extensionless imports are not supported there.
     ///
     /// For personal preference and compatibility reasons, the rule also allows configuration
     /// to _disallow_ extensions in imports. This is generally not recommended, but it can be
